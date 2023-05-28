@@ -11,7 +11,7 @@
   <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>
       <input type="text" class="form-control" id="nome" value="{{ $generos->nome }}" name="nome">
-</br>
+      </br>
       <button class="btn btn-primary" type="submit" name="button">Salvar</button>
   </div>
 </form>
