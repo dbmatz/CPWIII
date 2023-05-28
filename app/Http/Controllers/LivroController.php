@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use App\Models\Autor;
+use App\Models\Genero;
+use App\Models\Editora;
 
 class LivroController extends Controller
 {
   public function index()
   {
     $livros = Livro::all();
-    return view('livro', ['livros' => $livros]);
+    $autores = Autor::all();
+    $generos = Genero::all();
+    $editoras = Editora::all();
+    return view('livro', ['livros' => $livros, 'autores' => $autores, 'generos' => $generos, 'editoras' => $editoras]);
   }
 
   public function create()
