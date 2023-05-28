@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::fallback(function(){
+Route::fallback(function () {
     return "Página não exite";
 });
 
@@ -30,49 +30,38 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
-Route::prefix('autor')->group(function(){
+Route::prefix('autor')->group(function () {
     Route::get('/', [AutorController::class, 'index'])->name('autor-index');
     Route::get('/create', [AutorController::class, 'create'])->name('autor-create');
     Route::post('/', [AutorController::class, 'store'])->name('autor-store');
     Route::get('/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
-    Route::put('/{id}/edit', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
-    /*Route::post('/novo', [AutorController::class, 'novo']);
-    Route::update('/autor/editar/{id}', [AAutorControllerutor::class, 'editar']);
-    Route::delete('/autor/excluir/{id}', [AutorController::class, 'excluir']);
-    oute::post('/autor/salvar', [AutorController::class, 'salvar']);*/
+    Route::put('/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
+    Route::delete('/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
 });
 
-Route::prefix('genero')->group(function(){
+Route::prefix('genero')->group(function () {
     Route::get('/', [GeneroController::class, 'index'])->name('genero-index');
     Route::get('/create', [GeneroController::class, 'create'])->name('genero-create');
     Route::post('/', [GeneroController::class, 'store'])->name('genero-store');
     Route::get('/{id}/edit', [GeneroController::class, 'edit'])->where('id', '[0-9]+')->name('genero-edit');
-    Route::put('/{id}/edit', [GeneroController::class, 'update'])->where('id', '[0-9]+')->name('genero-update');
-    /*Route::post('/genero/novo', [GeneroController::class, 'novo']);
-    Route::update('/genero/editar/{id}', [GeneroController::class, 'editar']);
-    Route::delete('/genero/excluir/{id}', [GeneroController::class, 'excluir']);
-    Route::post('/genero/salvar', [GeneroController::class, 'salvar']);*/
+    Route::put('/{id}', [GeneroController::class, 'update'])->where('id', '[0-9]+')->name('genero-update');
+    Route::delete('/{id}', [GeneroController::class, 'destroy'])->where('id', '[0-9]+')->name('genero-destroy');
 });
 
-Route::prefix('editora')->group(function(){
+Route::prefix('editora')->group(function () {
     Route::get('/', [EditoraController::class, 'index'])->name('editora-index');
     Route::get('/create', [EditoraController::class, 'create'])->name('editora-create');
     Route::post('/', [EditoraController::class, 'store'])->name('editora-store');
     Route::get('/{id}/edit', [EditoraController::class, 'edit'])->where('id', '[0-9]+')->name('editora-edit');
-    Route::put('/{id}/edit', [EditoraController::class, 'update'])->where('id', '[0-9]+')->name('editora-update');
-    /*Route::post('/editora/novo', [EditoraController::class, 'novo']);
-    Route::update('/editora/editar/{id}', [EditoraController::class, 'editar']);
-    Route::delete('/editora/excluir/{id}', [EditoraController::class, 'excluir']);
-    Route::post('/editora/salvar', [EditoraController::class, 'salvar']);*/
+    Route::put('/{id}', [EditoraController::class, 'update'])->where('id', '[0-9]+')->name('editora-update');
+    Route::delete('/{id}', [EditoraController::class, 'destroy'])->where('id', '[0-9]+')->name('editora-destroy');
 });
 
-Route::prefix('livro')->group(function(){
+Route::prefix('livro')->group(function () {
     Route::get('/', [LivroController::class, 'index'])->name('livro-index');
     Route::get('/create', [LivroController::class, 'create'])->name('livro-create');
     Route::post('/', [LivroController::class, 'store'])->name('livro-store');
-    //Route::get('/{id}/edit', [LivroController::class, 'edit'])->where('id', '[0-9]+')->name('livro-edit');
-    /*Route::post('/livro/novo', [LivroController::class, 'novo']);
-    Route::update('/livro/editar/{id}', [LivroController::class, 'editar']);
-    Route::delete('/livro/excluir/{id}', [LivroController::class, 'excluir']);
-    Route::post('/livro/salvar', [LivroController::class, 'salvar']);*/
+    Route::get('/{id}/edit', [LivroController::class, 'edit'])->where('id', '[0-9]+')->name('livro-edit');
+    Route::put('/{id}', [LivroController::class, 'update'])->where('id', '[0-9]+')->name('livro-update');
+    Route::delete('/{id}', [LivroController::class, 'destroy'])->where('id', '[0-9]+')->name('livro-destroy');
 });

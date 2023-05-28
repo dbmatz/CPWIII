@@ -16,7 +16,7 @@
 <br>
 <br>
 <div style="display: flex; justify-content: center;">
-    <img src="https://revisaoparaque.com/wp-content/uploads/2014/12/cat-reading.gif" alt="" style="width: 20rem; heigth: 20rem;">
+    <img src="https://revisaoparaque.com/wp-content/uploads/2014/12/cat-reading.gif" alt="" style="width: 20rem; height: 20rem;">
 </div>
 
 @endsection
