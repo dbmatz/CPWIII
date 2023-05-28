@@ -20,4 +20,21 @@ class EditoraController extends Controller
         Editora::create($request->all());
         return redirect()->route('editora-index');
       }
+
+      public function edit($id){
+        $editoras = Editora::where('id', $id)->first();
+        if(!empty($editoras)){
+          return view('edit-editora', ['editoras'=>$editoras]);
+        }else{
+          return redirect()->route('editora-index');
+        }
+      }
+    
+      public function update(Request $request, $id){
+        $data = [
+          'nome' => $request->nome,
+        ];
+        Editora::where('id', $id)->update($data);
+        return redirect()->route('editora-index');
+      }
 }

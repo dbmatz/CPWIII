@@ -34,6 +34,8 @@ Route::prefix('autor')->group(function(){
     Route::get('/', [AutorController::class, 'index'])->name('autor-index');
     Route::get('/create', [AutorController::class, 'create'])->name('autor-create');
     Route::post('/', [AutorController::class, 'store'])->name('autor-store');
+    Route::get('/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
+    Route::put('/{id}/edit', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
     /*Route::post('/novo', [AutorController::class, 'novo']);
     Route::update('/autor/editar/{id}', [AAutorControllerutor::class, 'editar']);
     Route::delete('/autor/excluir/{id}', [AutorController::class, 'excluir']);
@@ -44,6 +46,8 @@ Route::prefix('genero')->group(function(){
     Route::get('/', [GeneroController::class, 'index'])->name('genero-index');
     Route::get('/create', [GeneroController::class, 'create'])->name('genero-create');
     Route::post('/', [GeneroController::class, 'store'])->name('genero-store');
+    Route::get('/{id}/edit', [GeneroController::class, 'edit'])->where('id', '[0-9]+')->name('genero-edit');
+    Route::put('/{id}/edit', [GeneroController::class, 'update'])->where('id', '[0-9]+')->name('genero-update');
     /*Route::post('/genero/novo', [GeneroController::class, 'novo']);
     Route::update('/genero/editar/{id}', [GeneroController::class, 'editar']);
     Route::delete('/genero/excluir/{id}', [GeneroController::class, 'excluir']);
@@ -54,6 +58,8 @@ Route::prefix('editora')->group(function(){
     Route::get('/', [EditoraController::class, 'index'])->name('editora-index');
     Route::get('/create', [EditoraController::class, 'create'])->name('editora-create');
     Route::post('/', [EditoraController::class, 'store'])->name('editora-store');
+    Route::get('/{id}/edit', [EditoraController::class, 'edit'])->where('id', '[0-9]+')->name('editora-edit');
+    Route::put('/{id}/edit', [EditoraController::class, 'update'])->where('id', '[0-9]+')->name('editora-update');
     /*Route::post('/editora/novo', [EditoraController::class, 'novo']);
     Route::update('/editora/editar/{id}', [EditoraController::class, 'editar']);
     Route::delete('/editora/excluir/{id}', [EditoraController::class, 'excluir']);
@@ -64,6 +70,7 @@ Route::prefix('livro')->group(function(){
     Route::get('/', [LivroController::class, 'index'])->name('livro-index');
     Route::get('/create', [LivroController::class, 'create'])->name('livro-create');
     Route::post('/', [LivroController::class, 'store'])->name('livro-store');
+    //Route::get('/{id}/edit', [LivroController::class, 'edit'])->where('id', '[0-9]+')->name('livro-edit');
     /*Route::post('/livro/novo', [LivroController::class, 'novo']);
     Route::update('/livro/editar/{id}', [LivroController::class, 'editar']);
     Route::delete('/livro/excluir/{id}', [LivroController::class, 'excluir']);

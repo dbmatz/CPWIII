@@ -20,4 +20,21 @@ class AutorController extends Controller
     Autor::create($request->all());
     return redirect()->route('autor-index');
   }
+
+  public function edit($id){
+    $autores = Autor::where('id', $id)->first();
+    if(!empty($autores)){
+      return view('edit-autor', ['autores'=>$autores]);
+    }else{
+      return redirect()->route('autor-index');
+    }
+  }
+
+  public function update(Request $request, $id){
+    $data = [
+      'nome' => $request->nome,
+    ];
+    Autor::where('id', $id)->update($data);
+    return redirect()->route('autor-index');
+  }
 }
