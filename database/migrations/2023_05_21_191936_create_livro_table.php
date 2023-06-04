@@ -15,12 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('titulo', 50);
             $table->integer('quantidade');
-            $table->integer('id_genero')->unsigned();
-            $table->foreign('id_genero')->references('id')->on('generos');
-            $table->integer('id_autor')->unsigned();
-            $table->foreign('id_autor')->references('id')->on('autors');
-            $table->integer('id_editora')->unsigned();
-            $table->foreign('id_editora')->references('id')->on('editoras');
+            $table->foreignID('genero_id')->references('id')->on('generos')->onDelete('cascade');
+            $table->foreignID('autor_id')->references('id')->on('autors')->onDelete('cascade');
+            $table->foreignID('editora_id')->references('id')->on('editoras')->onDelete('cascade');
             $table->timestamps();
         });
     }

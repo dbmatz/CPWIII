@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Livro;
+
 
 class Editora extends Model
 {
@@ -13,4 +16,9 @@ class Editora extends Model
         'id',
         'nome',
     ];
+
+    public function livros()
+    {
+        return $this->HasMany(Livro::class);
+    }
 }
