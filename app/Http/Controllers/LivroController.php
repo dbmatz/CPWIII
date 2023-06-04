@@ -7,6 +7,7 @@ use App\Models\Livro;
 use App\Models\Autor;
 use App\Models\Genero;
 use App\Models\Editora;
+use Illuminate\Support\Facades\DB;
 
 class LivroController extends Controller
 {
@@ -21,12 +22,21 @@ class LivroController extends Controller
 
   public function create()
   {
-    return view('livro-create');
+    $generos = Genero::all();
+    $editoras = Editora::all();
+    $autores = Autor::all();
+    return view('livro-create', ['generos' => $generos, 'editoras' => $editoras, 'autores' => $autores]);
   }
 
   public function store(Request $request)
   {
-    Livro::create($request->all());
+    $livro = new Livro();
+    $livro->titulo = $request->input('titulo');
+    $livro->quantidade = $request->input('quantidade');
+    $livro->autor_id = $request->input('autor_id');
+    $livro->genero_id = $request->input('genero_id');
+    $livro->editora_id = $request->input('editora_id');
+    $livro -> save();
     return redirect()->route('livro-index');
   }
 

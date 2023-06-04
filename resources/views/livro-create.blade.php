@@ -15,13 +15,25 @@
     <input type="number" class="form-control" id="quantidade" name="quantidade">
     </br>
     <label for="nome" class="form-label">Autor</label>
-    <input type="text" class="form-control" id="autor" name="autor">
+    <select class="form-select" id="autor_id" name="autor_id">
+      @foreach($autores as $autor)
+      <option value="{{$autor->id}}">{{$autor->nome}}</option>
+      @endforeach
+    </select>
     </br>
     <label for="nome" class="form-label">Genero</label>
-    <input type="text" class="form-control" id="genero" name="genero">
+    <select class="form-select" id="genero_id" name="genero_id">
+      @foreach($generos as $genero)
+      <option value="{{$genero->id}}">{{$genero->nome}}</option>
+      @endforeach
+    </select>
     </br>
     <label for="nome" class="form-label">Editora</label>
-    <input type="text" class="form-control" id="editora" name="editora">
+    <select class="form-select" id="editora_id" name="editora_id">
+      @foreach($editoras as $editora)
+      <option value="{{$editora->id}}">{{$editora->nome}}</option>
+      @endforeach
+    </select>
     </br>
     <button class="btn btn-primary" type="submit" name="button">Salvar</button>
 </form>
