@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo', 50);
             $table->integer('quantidade');
+            $table->string('foto');
             $table->foreignID('genero_id')->references('id')->on('generos')->onDelete('cascade');
             $table->foreignID('autor_id')->references('id')->on('autors')->onDelete('cascade');
             $table->foreignID('editora_id')->references('id')->on('editoras')->onDelete('cascade');

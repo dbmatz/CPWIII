@@ -14,6 +14,7 @@ class Autor extends Model
     protected $fillable = [
         'id',
         'nome',
+        'foto',
     ];  
 
     public function livros()

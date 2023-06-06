@@ -36,6 +36,15 @@ class LivroController extends Controller
     $livro->autor_id = $request->input('autor_id');
     $livro->genero_id = $request->input('genero_id');
     $livro->editora_id = $request->input('editora_id');
+
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $livro->foto = "/" . $imageName;
+    }
+
     $livro -> save();
     return redirect()->route('livro-index');
   }

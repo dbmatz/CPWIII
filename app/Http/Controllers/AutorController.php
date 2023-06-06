@@ -20,7 +20,19 @@ class AutorController extends Controller
 
   public function store(Request $request)
   {
-    Autor::create($request->all());
+    dd($request->file('foto'));
+    $autor = new Autor();
+    $autor->nome = $request->input('nome');
+
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $autor->foto = "/" . $imageName;
+    }
+    
+    $autor->save();
     return redirect()->route('autor-index');
   }
 

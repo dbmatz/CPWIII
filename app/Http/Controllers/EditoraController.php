@@ -20,7 +20,18 @@ class EditoraController extends Controller
 
   public function store(Request $request)
   {
-    Editora::create($request->all());
+    $editora = new Editora();
+    $editora->nome = $request->input('nome');
+
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $editora->foto = "/" . $imageName;
+    }
+    
+    $editora->save();
     return redirect()->route('editora-index');
   }
 

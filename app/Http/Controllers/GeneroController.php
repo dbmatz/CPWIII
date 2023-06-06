@@ -20,7 +20,18 @@ class GeneroController extends Controller
 
   public function store(Request $request)
   {
-    Genero::create($request->all());
+    $genero = new Genero();
+    $genero->nome = $request->input('nome');
+
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $genero->foto = "/" . $imageName;
+    }
+
+    $genero->save();
     return redirect()->route('genero-index');
   }
 

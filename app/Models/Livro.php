@@ -17,6 +17,7 @@ class Livro extends Model
         'id',
         'titulo',
         'quantidade',
+        'foto',
         'id_genero',
         'id_autor',
         'id_editora',
