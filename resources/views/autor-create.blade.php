@@ -12,7 +12,7 @@
     <input type="text" class="form-control" id="nome" name="nome">
 
     <label for="foto" class="form-label">Foto</label>
-    <input type="file" accept="image/jpeg" class="form-control" id="foto" name="foto">
+<input type="file" accept="image/jpeg" class="form-control" id="foto" name="foto">
     </br>
   </div>
   <button class="btn btn-primary" type="submit" name="button">Salvar</button>

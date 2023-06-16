@@ -20,7 +20,6 @@ class AutorController extends Controller
 
   public function store(Request $request)
   {
-    dd($request->file('foto'));
     $autor = new Autor();
     $autor->nome = $request->input('nome');
 
@@ -30,6 +29,8 @@ class AutorController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $autor->foto = "/" . $imageName;
+    }else{
+      $autor->foto = "/default.jpg";
     }
     
     $autor->save();
