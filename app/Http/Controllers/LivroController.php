@@ -43,11 +43,11 @@ class LivroController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $livro->foto = "/" . $imageName;
-    }else{
+    } else {
       $livro->foto = "default.jpg";
     }
 
-    $livro -> save();
+    $livro->save();
     return redirect()->route('livro-index');
   }
 
@@ -63,13 +63,28 @@ class LivroController extends Controller
 
   public function update(Request $request, $id)
   {
-    $data = [
-      'titulo' => $request->titulo,
-      'quantidade' => $request->quantidade,
-      'id_genero' => $request->id_genero,
-      'id_autor' => $request->id_autor,
-      'id_editora' => $request->id_editora,
-    ];
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $data = [
+        'titulo' => $request->titulo,
+        'quantidade' => $request->quantidade,
+        'id_genero' => $request->id_genero,
+        'id_autor' => $request->id_autor,
+        'id_editora' => $request->id_editora,
+        'foto' => $imageName,
+      ];
+    } else {
+      $data = [
+        'titulo' => $request->titulo,
+        'quantidade' => $request->quantidade,
+        'id_genero' => $request->id_genero,
+        'id_autor' => $request->id_autor,
+        'id_editora' => $request->id_editora,
+      ];
+    }
     Livro::where('id', $id)->update($data);
     return redirect()->route('livro-index');
   }

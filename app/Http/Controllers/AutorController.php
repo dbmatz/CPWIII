@@ -49,9 +49,21 @@ class AutorController extends Controller
 
   public function update(Request $request, $id)
   {
-    $data = [
-      'nome' => $request->nome,
-    ];
+    if($request->hasFile('foto')){
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $data = [
+        'nome' => $request->nome,
+        'foto' => $imageName,
+      ];
+    }else{
+      $data = [
+        'nome' => $request->nome,
+      ];
+    }
+
     Autor::where('id', $id)->update($data);
     return redirect()->route('autor-index');
   }

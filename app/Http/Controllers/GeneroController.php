@@ -29,8 +29,8 @@ class GeneroController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $genero->foto = "/" . $imageName;
-    }else{
-      $genero->foto="default.jpg";
+    } else {
+      $genero->foto = "default.jpg";
     }
 
     $genero->save();
@@ -49,9 +49,20 @@ class GeneroController extends Controller
 
   public function update(Request $request, $id)
   {
-    $data = [
-      'nome' => $request->nome,
-    ];
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $data = [
+        'nome' => $request->nome,
+        'foto' => $imageName,
+      ];
+    } else {
+      $data = [
+        'nome' => $request->nome,
+      ];
+    }
     Genero::where('id', $id)->update($data);
     return redirect()->route('genero-index');
   }

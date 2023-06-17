@@ -29,10 +29,10 @@ class EditoraController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $editora->foto = "/" . $imageName;
-    }else{
+    } else {
       $editora->foto = "default.jpg";
     }
-    
+
     $editora->save();
     return redirect()->route('editora-index');
   }
@@ -49,9 +49,20 @@ class EditoraController extends Controller
 
   public function update(Request $request, $id)
   {
-    $data = [
-      'nome' => $request->nome,
-    ];
+    if ($request->hasFile('foto')) {
+      $arquivo = $request->file('foto');
+      $destPath = public_path('imagens');
+      $imageName = time() . '_' . $arquivo->getClientOriginalName();
+      $arquivo->move($destPath, $imageName);
+      $data = [
+        'nome' => $request->nome,
+        'foto' => $imageName,
+      ];
+    } else {
+      $data = [
+        'nome' => $request->nome,
+      ];
+    }
     Editora::where('id', $id)->update($data);
     return redirect()->route('editora-index');
   }
