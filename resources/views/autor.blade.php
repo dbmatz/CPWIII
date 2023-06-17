@@ -8,24 +8,24 @@
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Foto</th>
-      <th>Nome</th>
-      <th>Editar</th>
-      <th>Excluir</th>
+      <th>ID<th>
+      <th>Foto<th>
+      <th>Nome<th>
+      <th>Editar<th>
+      <th>Excluir<th>
     </tr>
-  </thead>
+  <tdead>
   <tbody>
     @foreach($autores as $autor)
     <tr>
-      <th>{{ $autor->id }}</th>
-      <th><img src="/imagens/{{$autor->foto}}"></th>
-      <th>{{ $autor->nome }}</th>
-      <th><a href="{{ route('autor-edit',['id'=>$autor->id]) }}" class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-          </svg></a></th>
-      <th>
+      <td>{{ $autor->id }}<td>
+      <td><img src="/imagens/{{$autor->foto}}"><td>
+      <td>{{ $autor->nome }}<td>
+      <td><a href="{{ route('autor-edit',['id'=>$autor->id]) }}" class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" wi<td="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <p<td d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <p<td fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+          </svg></a><td>
+      <td>
         <form action="{{ route('autor-destroy',['id'=>$autor->id]) }}" method="POST">
           @csrf
           @method('delete')
@@ -34,7 +34,7 @@
               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
             </svg></button>
         </form>
-      </th>
+      <td>
     </tr>
     @endforeach
   </tbody>
