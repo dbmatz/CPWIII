@@ -30,7 +30,7 @@ class GeneroController extends Controller
       $arquivo->move($destPath, $imageName);
       $genero->foto = "/" . $imageName;
     }else{
-      $genero->foto="default_genero.jpg";
+      $genero->foto="default.jpg";
     }
 
     $genero->save();

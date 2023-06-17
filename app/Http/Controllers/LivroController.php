@@ -43,6 +43,8 @@ class LivroController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $livro->foto = "/" . $imageName;
+    }else{
+      $livro->foto = "default.jpg";
     }
 
     $livro -> save();

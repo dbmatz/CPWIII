@@ -29,6 +29,8 @@ class EditoraController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $editora->foto = "/" . $imageName;
+    }else{
+      $editora->foto = "default.jpg";
     }
     
     $editora->save();
