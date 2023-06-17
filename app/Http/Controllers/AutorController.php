@@ -28,9 +28,9 @@ class AutorController extends Controller
       $destPath = public_path('imagens');
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
-      $autor->foto = "/" . $imageName;
+      $autor->foto = $imageName;
     }else{
-      $autor->foto = "/default.jpg";
+      $autor->foto = "default_user.jpg";
     }
     
     $autor->save();

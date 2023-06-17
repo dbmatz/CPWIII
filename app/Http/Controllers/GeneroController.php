@@ -29,6 +29,8 @@ class GeneroController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $genero->foto = "/" . $imageName;
+    }else{
+      $genero->foto="default_genero.jpg";
     }
 
     $genero->save();

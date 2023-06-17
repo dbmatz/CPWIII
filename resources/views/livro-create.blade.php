@@ -5,12 +5,15 @@
 @section('content')
 
 <h1>Cadastro de Livro</h1>
-<form action="{{ route('livro-store') }}" method="post">
+<form action="{{ route('livro-store') }}" method="post" enctype="multipart/form-data">
   @csrf
   <div class="mb-3">
     <label for="nome" class="form-label">Titulo</label>
     <input type="text" class="form-control" id="titulo" name="titulo">
     </br>
+    <label for="foto" class="form-label">Foto</label><br />
+    <input id="foto" name="foto" type="file" accept="image/jpeg" class="form-control"/>
+    <br>
     <label for="nome" class="form-label">Quantidade</label>
     <input type="number" class="form-control" id="quantidade" name="quantidade">
     </br>

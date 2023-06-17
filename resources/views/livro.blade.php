@@ -22,6 +22,7 @@
     @foreach($livros as $livro)
     <tr>
       <th>{{ $livro->id }}</th>
+      <th><img src="imagens/{{ $livro->foto }}" alt=""></th>
       <th>{{ $livro->titulo }}</th>
       <th>{{ $livro->genero->nome }}</th>
       <th>{{ $livro->editora->nome }}</th>
