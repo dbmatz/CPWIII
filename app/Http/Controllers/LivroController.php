@@ -13,7 +13,7 @@ class LivroController extends Controller
 {
   public function index()
   {
-    $livros = Livro::all();
+    $livros = Livro::orderBy('id')->get();
     $autores = Autor::all();
     $generos = Genero::all();
     $editoras = Editora::all();
@@ -47,17 +47,23 @@ class LivroController extends Controller
       $livro->foto = "default.jpg";
     }
 
-    $livro->save();
-    return redirect()->route('livro-index');
+    if ($livro->save()) {
+      return redirect()->route('livro-index');
+    } else {
+      return redirect()->route('livro-index')->withErrors('Não foi possivel salvar o livro.');
+    }
   }
 
   public function edit($id)
   {
-    $livros = Livro::where('id', $id)->first();
-    if (!empty($livros)) {
-      return view('edit-livro', ['livros' => $livros]);
+    $livro = Livro::where('id', $id)->first();
+    if (!empty($livro)) {
+      $autores = Autor::all();
+      $generos = Genero::all();
+      $editoras = Editora::all();
+      return view('edit-livro', ['livro' => $livro, 'autores' => $autores, 'generos' => $generos, 'editoras' => $editoras]);
     } else {
-      return redirect()->route('livro-index');
+      return redirect()->route('livro-index')->withErrors('Não foi possivel encontrar o livro.');
     }
   }
 
@@ -85,13 +91,19 @@ class LivroController extends Controller
         'id_editora' => $request->id_editora,
       ];
     }
-    Livro::where('id', $id)->update($data);
-    return redirect()->route('livro-index');
+    if (Livro::where('id', $id)->update($data)) {
+      return redirect()->route('livro-index')->with('status', 'Livro alterado!');
+    } else {
+      return redirect()->route('livro-index')->withErrors('Não foi possivel alterar o livro.');
+    }
   }
 
   public function destroy($id)
   {
-    Livro::where('id', $id)->delete();
-    return redirect()->route('livro-index');
+    if (Livro::where('id', $id)->delete()) {
+      return redirect()->route('livro-index')->with('status', 'Livro deletado!');
+    } else {
+      return redirect()->route('livro-index')->withErrors('Não foi possivel deletar o livro.');
+    }
   }
 }

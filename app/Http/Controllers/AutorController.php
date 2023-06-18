@@ -9,7 +9,7 @@ class AutorController extends Controller
 {
   public function index()
   {
-    $autores = Autor::all();
+    $autores = Autor::orderBy('id')->get();
     return view('autor', ['autores' => $autores]);
   }
 
@@ -29,12 +29,15 @@ class AutorController extends Controller
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
       $arquivo->move($destPath, $imageName);
       $autor->foto = $imageName;
-    }else{
+    } else {
       $autor->foto = "default_user.jpg";
     }
-    
-    $autor->save();
-    return redirect()->route('autor-index');
+
+    if ($autor->save()) {
+      return redirect()->route('autor-index')->with('status', 'Autor cadastrado com sucesso!');
+    } else {
+      return redirect()->route('autor-index')->withErrors('Não foi possivel cadastrar o autor. Tente novamente');
+    }
   }
 
   public function edit($id)
@@ -43,13 +46,13 @@ class AutorController extends Controller
     if (!empty($autores)) {
       return view('edit-autor', ['autores' => $autores]);
     } else {
-      return redirect()->route('autor-index');
+      return redirect()->route('autor-index')->withErrors('Não foi possivel achar o autor. Tente novamente');
     }
   }
 
   public function update(Request $request, $id)
   {
-    if($request->hasFile('foto')){
+    if ($request->hasFile('foto')) {
       $arquivo = $request->file('foto');
       $destPath = public_path('imagens');
       $imageName = time() . '_' . $arquivo->getClientOriginalName();
@@ -58,19 +61,25 @@ class AutorController extends Controller
         'nome' => $request->nome,
         'foto' => $imageName,
       ];
-    }else{
+    } else {
       $data = [
         'nome' => $request->nome,
       ];
     }
 
-    Autor::where('id', $id)->update($data);
-    return redirect()->route('autor-index');
+    if (Autor::where('id', $id)->update($data)) {
+      return redirect()->route('autor-index')->with('status', 'Autor alterado com sucesso!');
+    } else {
+      return redirect()->route('autor-index')->withErrors('Não foi possivel alterar o autor. Tente novamente');
+    }
   }
 
   public function destroy($id)
   {
-    Autor::where('id', $id)->delete();
-    return redirect()->route('autor-index');
+    if (Autor::where('id', $id)->delete()) {
+      return redirect()->route('autor-index')->with('status', 'Autor excluido com sucesso');
+    } else {
+      return redirect()->route('autor-index')->withErrors('Não foi possivel deletar o autor. Tente novamente');
+    }
   }
 }

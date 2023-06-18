@@ -9,7 +9,7 @@ class EditoraController extends Controller
 {
   public function index()
   {
-    $editoras = Editora::all();
+    $editoras = Editora::orderBy('id')->get();
     return view('editora', ['editoras' => $editoras]);
   }
 
@@ -33,8 +33,11 @@ class EditoraController extends Controller
       $editora->foto = "default.jpg";
     }
 
-    $editora->save();
-    return redirect()->route('editora-index');
+    if ($editora->save()) {
+      return redirect()->route('editora-index')->with('status', 'Editora criada!');
+    } else {
+      return redirect()->route('editora-index')->withErrors('Não foi possivel salvar a editora.');
+    }
   }
 
   public function edit($id)
@@ -43,7 +46,7 @@ class EditoraController extends Controller
     if (!empty($editoras)) {
       return view('edit-editora', ['editoras' => $editoras]);
     } else {
-      return redirect()->route('editora-index');
+      return redirect()->route('editora-index')->withErrors('Não foi possivel encontrar a editora.');
     }
   }
 
@@ -63,13 +66,19 @@ class EditoraController extends Controller
         'nome' => $request->nome,
       ];
     }
-    Editora::where('id', $id)->update($data);
-    return redirect()->route('editora-index');
+    if (Editora::where('id', $id)->update($data)) {
+      return redirect()->route('editora-index')->with('status', 'Editora alterada!');
+    } else {
+      return redirect()->route('editora-index')->withErrors('Não foi possivel alterar a editora.');
+    }
   }
 
   public function destroy($id)
   {
-    Editora::where('id', $id)->delete();
+    if(Editora::where('id', $id)->delete()){
     return redirect()->route('editora-index');
+    }else{
+      return redirect()->route('editora-index')->withErrors('Não foi possivel deletar a editora.');
+    }
   }
 }

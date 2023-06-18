@@ -9,7 +9,7 @@ class GeneroController extends Controller
 {
   public function index()
   {
-    $generos = Genero::all();
+    $generos = Genero::orderBy('id')->get();
     return view('genero', ['generos' => $generos]);
   }
 
@@ -33,8 +33,11 @@ class GeneroController extends Controller
       $genero->foto = "default.jpg";
     }
 
-    $genero->save();
-    return redirect()->route('genero-index');
+    if ($genero->save()) {
+      return redirect()->route('genero-index')->with('status', 'Gênero criado!');
+    } else {
+      return redirect()->route('genero-index')->withErrors('Não foi possivel salvar o gênero.');
+    }
   }
 
   public function edit($id)
@@ -43,7 +46,7 @@ class GeneroController extends Controller
     if (!empty($generos)) {
       return view('edit-genero', ['generos' => $generos]);
     } else {
-      return redirect()->route('genero-index');
+      return redirect()->route('genero-index')->withErrors('Não foi possivel encontrar o gênero.');
     }
   }
 
@@ -63,13 +66,19 @@ class GeneroController extends Controller
         'nome' => $request->nome,
       ];
     }
-    Genero::where('id', $id)->update($data);
-    return redirect()->route('genero-index');
+    if (Genero::where('id', $id)->update($data)) {
+      return redirect()->route('genero-index')->with('status', 'Gênero alterado!');
+    } else {
+      return redirect()->route('genero-index')->withErrors('Não foi possivel alterar o gênero.');
+    }
   }
 
   public function destroy($id)
   {
-    Genero::where('id', $id)->delete();
-    return redirect()->route('genero-index');
+    if (Genero::where('id', $id)->delete()) {
+      return redirect()->route('genero-index')->with('status', 'Gênero deletado!');
+    } else {
+      return redirect()->route('genero-index')->withErrors('Não foi possivel deletar o gênero.');
+    }
   }
 }

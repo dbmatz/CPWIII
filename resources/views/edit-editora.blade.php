@@ -5,7 +5,7 @@
 @section('content')
 
 <h1>Editar Editora</h1>
-<form action="{{ route('editora-update', ['id'=>$editoras->id]) }}" method="post">
+<form action="{{ route('editora-update', ['id'=>$editoras->id]) }}" method="post" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <div class="mb-3">
