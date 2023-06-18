@@ -81,4 +81,10 @@ class GeneroController extends Controller
       return redirect()->route('genero-index')->withErrors('Não foi possivel deletar o gênero.');
     }
   }
+
+  public function relatorio() {
+    $generos = Genero::orderBy('id')->get();
+    $pdf = Pdf::loadView('genero-relatorio', compact('generos'));
+    return $pdf->download('generos.pdf');
+  }
 }

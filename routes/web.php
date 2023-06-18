@@ -5,6 +5,7 @@ use App\Http\Controllers\AutorController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\LivroController;
+use App\Models\Livro;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::prefix('autor')->group(function () {
     Route::get('/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
     Route::put('/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
     Route::delete('/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
+    Route::get('/relatorio', [AutorController::class, 'relatorio'])->name('autor-relatorio');
 });
 
 Route::prefix('genero')->group(function () {
@@ -46,6 +48,7 @@ Route::prefix('genero')->group(function () {
     Route::get('/{id}/edit', [GeneroController::class, 'edit'])->where('id', '[0-9]+')->name('genero-edit');
     Route::put('/{id}', [GeneroController::class, 'update'])->where('id', '[0-9]+')->name('genero-update');
     Route::delete('/{id}', [GeneroController::class, 'destroy'])->where('id', '[0-9]+')->name('genero-destroy');
+    Route::get('/relatorio', [GeneroController::class, 'relatorio'])->name('genero-relatorio');
 });
 
 Route::prefix('editora')->group(function () {
@@ -55,6 +58,7 @@ Route::prefix('editora')->group(function () {
     Route::get('/{id}/edit', [EditoraController::class, 'edit'])->where('id', '[0-9]+')->name('editora-edit');
     Route::put('/{id}', [EditoraController::class, 'update'])->where('id', '[0-9]+')->name('editora-update');
     Route::delete('/{id}', [EditoraController::class, 'destroy'])->where('id', '[0-9]+')->name('editora-destroy');
+    Route::get('/relatorio', [EditoraController::class, 'relatorio'])->name('editora-relatorio');
 });
 
 Route::prefix('livro')->group(function () {
@@ -64,4 +68,5 @@ Route::prefix('livro')->group(function () {
     Route::get('/{id}/edit', [LivroController::class, 'edit'])->where('id', '[0-9]+')->name('livro-edit');
     Route::put('/{id}', [LivroController::class, 'update'])->where('id', '[0-9]+')->name('livro-update');
     Route::delete('/{id}', [LivroController::class, 'destroy'])->where('id', '[0-9]+')->name('livro-destroy');
+    Route::get('/relatorio', [LivroController::class, 'relatorio'])->name('livro-relatorio');
 });

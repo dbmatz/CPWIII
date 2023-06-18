@@ -5,6 +5,7 @@
 @section('content')
 <h1>Listagem de Generos</h1>
 <a class="btn btn-primary mb-2" href="{{ route('genero-create') }}">Novo</a>
+<a class="btn btn-primary mb-2" href="{{ route('genero-relatorio') }}">Relatorio</a>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>

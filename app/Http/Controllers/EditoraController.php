@@ -81,4 +81,10 @@ class EditoraController extends Controller
       return redirect()->route('editora-index')->withErrors('Não foi possivel deletar a editora.');
     }
   }
+
+  public function relatorio() {
+    $editoras = Editora::orderBy('id')->get();
+    $pdf = Pdf::loadView('editora-relatorio', compact('editoras'));
+    return $pdf->download('editoras.pdf');
+  }
 }

@@ -106,4 +106,13 @@ class LivroController extends Controller
       return redirect()->route('livro-index')->withErrors('Não foi possivel deletar o livro.');
     }
   }
+
+  public function relatorio() {
+    $livros = Livro::orderBy('id')->get();
+    /*$generos = Genero::all();
+    $autores = Autor::all();
+    $editoras = Editora::all();*/
+    $pdf = Pdf::loadView('livro-relatorio', compact('livros'));
+    return $pdf->download('livro.pdf');
+  }
 }

@@ -10,7 +10,7 @@
   @method('PUT')
   <div class="mb-3">
     <label for="nome" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="nome" name="nome" value="{{ $autores->nome }}">
+    <input type="text" class="form-control" id="nome" name="nome" value="{{ $autores->nome }}" required>
     <label for="foto" class="form-label">Foto</label>
     <input type="file" class="form-control" id="foto" name="foto">
     </br>

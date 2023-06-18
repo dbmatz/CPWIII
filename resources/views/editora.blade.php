@@ -5,6 +5,7 @@
 @section('content')
 <h1>Listagem de Editoras</h1>
 <a class="btn btn-primary mb-2" href="{{ route('editora-create') }}">Novo</a>
+<a class="btn btn-primary mb-2" href="{{ route('editora-relatorio') }}">Relatorio</a>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>

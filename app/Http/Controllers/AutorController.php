@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Autor;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AutorController extends Controller
 {
@@ -81,5 +82,11 @@ class AutorController extends Controller
     } else {
       return redirect()->route('autor-index')->withErrors('Não foi possivel deletar o autor. Tente novamente');
     }
+  }
+
+  function relatorio() {
+    $autores = Autor::orderBy('id')->get();
+    $pdf = Pdf::loadView('autor-relatorio', compact('autores'));
+    return $pdf->download('autores.pdf');
   }
 }
