@@ -44,16 +44,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/autor', [AutorController::class, 'index'])->name('autor-index');
-    Route::get('autor/create', [AutorController::class, 'create'])->name('autor-create');
-    Route::post('autor/', [AutorController::class, 'store'])->name('autor-store');
-    Route::get('autor/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
-    Route::put('autor/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
-    Route::delete('autor/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
-});
-
-Route::prefix('genero')->group(function () {
+Route::group(['prefix' => 'genero', 'middleware' => ['auth']], function () {
     Route::get('/', [GeneroController::class, 'index'])->name('genero-index');
     Route::get('/create', [GeneroController::class, 'create'])->name('genero-create');
     Route::post('/', [GeneroController::class, 'store'])->name('genero-store');
@@ -62,7 +53,16 @@ Route::prefix('genero')->group(function () {
     Route::delete('/{id}', [GeneroController::class, 'destroy'])->where('id', '[0-9]+')->name('genero-destroy');
 });
 
-Route::prefix('editora')->group(function () {
+Route::group(['prefix' => 'autor', 'middleware' => ['auth']], function () {
+    Route::get('/autor', [AutorController::class, 'index'])->name('autor-index');
+    Route::get('autor/create', [AutorController::class, 'create'])->name('autor-create');
+    Route::post('autor/', [AutorController::class, 'store'])->name('autor-store');
+    Route::get('autor/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
+    Route::put('autor/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
+    Route::delete('autor/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
+});
+
+Route::group(['prefix' => 'editora', 'middleware' => ['auth']], function () {
     Route::get('/', [EditoraController::class, 'index'])->name('editora-index');
     Route::get('/create', [EditoraController::class, 'create'])->name('editora-create');
     Route::post('/', [EditoraController::class, 'store'])->name('editora-store');
@@ -71,7 +71,7 @@ Route::prefix('editora')->group(function () {
     Route::delete('/{id}', [EditoraController::class, 'destroy'])->where('id', '[0-9]+')->name('editora-destroy');
 });
 
-Route::prefix('livro')->group(function () {
+Route::group(['prefix' => 'livro', 'middleware' => ['auth']], function () {
     Route::get('/', [LivroController::class, 'index'])->name('livro-index');
     Route::get('/create', [LivroController::class, 'create'])->name('livro-create');
     Route::post('/', [LivroController::class, 'store'])->name('livro-store');

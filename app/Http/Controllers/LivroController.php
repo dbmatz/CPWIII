@@ -48,7 +48,7 @@ class LivroController extends Controller
     }
 
     if ($livro->save()) {
-      return redirect()->route('livro-index');
+      return redirect()->route('livro-index')->with('status', 'Livro cadastrado!');
     } else {
       return redirect()->route('livro-index')->withErrors('Não foi possivel salvar o livro.');
     }

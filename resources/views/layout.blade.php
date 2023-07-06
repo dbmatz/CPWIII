@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.108.0">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="<?php echo asset('css/style.css')?>" type="text/css"> 
   <title>@yield('tittle')</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-static/">
@@ -45,6 +45,24 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('editora-index') }}">Editoras</a>
           </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          @guest
+          <li class="nav-item">
+            <a class="nav-link active nav-link-red" aria-current="page" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active nav-link-red" aria-current="page" href="/register">Registrar</a>
+          </li>
+          @endguest
+          @auth
+          <li class="nav-item">
+            <form action="/logout" method="POST">
+              @csrf
+              <button type="submit" class="btn nav-link active nav-link-red" aria-current="page">Sair</button>
+            </form>
+          </li>
+          @endauth
         </ul>
       </div>
     </div>

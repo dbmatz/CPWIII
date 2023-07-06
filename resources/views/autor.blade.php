@@ -5,7 +5,7 @@
 @section('content')
 <h1>Listagem de Autores</h1>
 <a class="btn btn-primary mb-2" href="{{ route('autor-create') }}">Novo</a>
-<a class="btn btn-primary mb-2" href="{{ route('autor-relatorio') }}">Relatorio</a>
+<a class="btn btn-primary mb-2" href="">Relatorio</a>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
