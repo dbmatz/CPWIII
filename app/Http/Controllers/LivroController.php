@@ -32,7 +32,8 @@ class LivroController extends Controller
   {
     $livro = new Livro();
     $livro->titulo = $request->input('titulo');
-    $livro->quantidade = $request->input('quantidade');
+    $livro->lido = $request->input('lido');
+    $livro->descricao = $request->input('descricao');
     $livro->autor_id = $request->input('autor_id');
     $livro->genero_id = $request->input('genero_id');
     $livro->editora_id = $request->input('editora_id');
@@ -108,11 +109,11 @@ class LivroController extends Controller
   }
 
   public function relatorio() {
-    $livros = Livro::orderBy('id')->get();
-    /*$generos = Genero::all();
+   /* $livros = Livro::orderBy('id')->get();
+    $generos = Genero::all();
     $autores = Autor::all();
-    $editoras = Editora::all();*/
+    $editoras = Editora::all();
     $pdf = Pdf::loadView('livro-relatorio', compact('livros'));
-    return $pdf->download('livro.pdf');
+    return $pdf->download('livro.pdf');*/
   }
 }

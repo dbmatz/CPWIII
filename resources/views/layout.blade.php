@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.108.0">
-  <link rel="stylesheet" href="<?php echo asset('css/style.css')?>" type="text/css"> 
+  <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" type="text/css">
   <title>@yield('tittle')</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-static/">
@@ -27,7 +27,7 @@
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('/') }}">News</a>
+      <a class="navbar-brand" href="{{ route('/') }}">Syscat</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,13 +56,28 @@
           </li>
           @endguest
           @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{Auth::user()->name}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
+              <li>
+                <form action="/logout" method="POST">
+                  @csrf
+                  <button type="submit" class="dropdown-item" aria-current="page">Sair</button>
+                </form>
+            </ul>
+          </li>
+          @endauth
+          <!--@auth
           <li class="nav-item">
             <form action="/logout" method="POST">
               @csrf
               <button type="submit" class="btn nav-link active nav-link-red" aria-current="page">Sair</button>
             </form>
           </li>
-          @endauth
+          @endauth-->
         </ul>
       </div>
     </div>

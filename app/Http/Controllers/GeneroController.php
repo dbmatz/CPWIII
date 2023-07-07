@@ -23,16 +23,6 @@ class GeneroController extends Controller
     $genero = new Genero();
     $genero->nome = $request->input('nome');
 
-    if ($request->hasFile('foto')) {
-      $arquivo = $request->file('foto');
-      $destPath = public_path('imagens');
-      $imageName = time() . '_' . $arquivo->getClientOriginalName();
-      $arquivo->move($destPath, $imageName);
-      $genero->foto = "/" . $imageName;
-    } else {
-      $genero->foto = "default.jpg";
-    }
-
     if ($genero->save()) {
       return redirect()->route('genero-index')->with('status', 'Gênero criado!');
     } else {
@@ -82,9 +72,9 @@ class GeneroController extends Controller
     }
   }
 
-  public function relatorio() {
+  /*public function relatorio() {
     $generos = Genero::orderBy('id')->get();
     $pdf = Pdf::loadView('genero-relatorio', compact('generos'));
     return $pdf->download('generos.pdf');
-  }
+  }*/
 }

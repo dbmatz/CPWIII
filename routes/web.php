@@ -54,12 +54,12 @@ Route::group(['prefix' => 'genero', 'middleware' => ['auth']], function () {
 });
 
 Route::group(['prefix' => 'autor', 'middleware' => ['auth']], function () {
-    Route::get('/autor', [AutorController::class, 'index'])->name('autor-index');
-    Route::get('autor/create', [AutorController::class, 'create'])->name('autor-create');
-    Route::post('autor/', [AutorController::class, 'store'])->name('autor-store');
-    Route::get('autor/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
-    Route::put('autor/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
-    Route::delete('autor/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
+    Route::get('/', [AutorController::class, 'index'])->name('autor-index');
+    Route::get('/create', [AutorController::class, 'create'])->name('autor-create');
+    Route::post('/', [AutorController::class, 'store'])->name('autor-store');
+    Route::get('/{id}/edit', [AutorController::class, 'edit'])->where('id', '[0-9]+')->name('autor-edit');
+    Route::put('/{id}', [AutorController::class, 'update'])->where('id', '[0-9]+')->name('autor-update');
+    Route::delete('/{id}', [AutorController::class, 'destroy'])->where('id', '[0-9]+')->name('autor-destroy');
 });
 
 Route::group(['prefix' => 'editora', 'middleware' => ['auth']], function () {
