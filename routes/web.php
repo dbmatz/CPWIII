@@ -8,6 +8,7 @@ use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Livro;
+use App\Models\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,17 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::fallback(function () {
     return "Página não exite";
 });
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $reviews = Review::all();
+    return view('welcome', ['reviews' => $reviews]);
 })->name('/');
 
 Route::group(['prefix' => 'genero', 'middleware' => ['auth']], function () {
