@@ -6,6 +6,7 @@ use App\Http\Controllers\AutorController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Livro;
 
 /*
@@ -22,7 +23,7 @@ use App\Models\Livro;
 require __DIR__ . '/auth.php';
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -78,4 +79,13 @@ Route::group(['prefix' => 'livro', 'middleware' => ['auth']], function () {
     Route::get('/{id}/edit', [LivroController::class, 'edit'])->where('id', '[0-9]+')->name('livro-edit');
     Route::put('/{id}', [LivroController::class, 'update'])->where('id', '[0-9]+')->name('livro-update');
     Route::delete('/{id}', [LivroController::class, 'destroy'])->where('id', '[0-9]+')->name('livro-destroy');
+});
+
+Route::group(['prefix' => 'review', 'middleware' => ['auth']], function () {
+    Route::get('/', [ReviewController::class, 'index'])->name('review-index');
+    Route::get('/create', [ReviewController::class, 'create'])->name('review-create');
+    Route::post('/', [ReviewController::class, 'store'])->name('review-store');
+    Route::get('/{id}/edit', [ReviewController::class, 'edit'])->where('id', '[0-9]+')->name('review-edit');
+    Route::put('/{id}', [ReviewController::class, 'update'])->where('id', '[0-9]+')->name('review-update');
+    Route::delete('/{id}', [ReviewController::class, 'destroy'])->where('id', '[0-9]+')->name('review-destroy');
 });

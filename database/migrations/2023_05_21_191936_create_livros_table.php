@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titulo', 50);
             $table->string('foto');
             $table->boolean('lido')->default(false);
+            $table->string('descricao');
             $table->foreignID('autor_id')->references('id')->on('autors')->onDelete('cascade');
             $table->foreignID('editora_id')->references('id')->on('editoras')->onDelete('cascade');
             $table->foreignID('genero_id')->references('id')->on('generos')->onDelete('cascade');

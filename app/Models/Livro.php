@@ -37,4 +37,9 @@ class Livro extends Model
     {
         return $this->belongsTo(Editora::class);
     }
+
+    public function reviews()
+    {
+        return $this->HasMany(Review::class);
+    }
 }
