@@ -11,6 +11,7 @@
     <tr>
       <th>ID</th>
       <th>Foto</th>
+      <th>Status</th>
       <th>Titulo</th>
       <th>Autor</th>
       <th>Genero</th>
@@ -25,6 +26,7 @@
     <tr>
       <td>{{ $livro->id }}</td>
       <td><img src="imagens/{{ $livro->foto }}" alt=""></td>
+      <td>{{ $livro->status }}</td>
       <td>{{ $livro->titulo }}</td>
       <td>{{ $livro->genero->nome }}</td>
       <td>{{ $livro->editora->nome }}</td>

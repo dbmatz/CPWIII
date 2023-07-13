@@ -9,6 +9,7 @@ use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Livro;
 use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,9 @@ use App\Models\Review;
 require __DIR__ . '/auth.php';
 
 Route::get('/dashboard', function () {
-    return view('welcome');
+    $reviews = Review::all();
+    $livros = DB::table('livros')->where('status', false)->limit(3)->get();
+    return view('welcome', ['reviews' => $reviews, 'livros' => $livros]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -37,10 +40,10 @@ Route::fallback(function () {
     return "Página não exite";
 });
 
-
 Route::get('/', function () {
     $reviews = Review::all();
-    return view('welcome', ['reviews' => $reviews]);
+    $livros = DB::table('livros')->where('status', false)->take(3)->get();
+    return view('welcome', ['reviews' => $reviews, 'livros' => $livros]);
 })->name('/');
 
 Route::group(['prefix' => 'genero', 'middleware' => ['auth']], function () {
@@ -86,4 +89,5 @@ Route::group(['prefix' => 'review', 'middleware' => ['auth']], function () {
     Route::get('/{id}/edit', [ReviewController::class, 'edit'])->where('id', '[0-9]+')->name('review-edit');
     Route::put('/{id}', [ReviewController::class, 'update'])->where('id', '[0-9]+')->name('review-update');
     Route::delete('/{id}', [ReviewController::class, 'destroy'])->where('id', '[0-9]+')->name('review-destroy');
+    Route::get('/{id}', [ReviewController::class, 'show'])->where('id', '[0-9]+')->name('review-show');
 });

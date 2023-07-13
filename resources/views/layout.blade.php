@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 
 <head>
   <meta charset="utf-8">
@@ -7,18 +7,14 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.108.0">
-  <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" type="text/css">
   <title>@yield('tittle')</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-static/">
 
-
-
-
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
   <meta name="theme-color" content="#712cf9">
+  <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" type="text/css">
 
 
 </head>
@@ -75,14 +71,6 @@
             </ul>
           </li>
           @endauth
-          <!--@auth
-          <li class="nav-item">
-            <form action="/logout" method="POST">
-              @csrf
-              <button type="submit" class="btn nav-link active nav-link-red" aria-current="page">Sair</button>
-            </form>
-          </li>
-          @endauth-->
         </ul>
       </div>
     </div>

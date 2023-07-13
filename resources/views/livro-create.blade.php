@@ -14,12 +14,12 @@
     <label for="foto" class="form-label">Foto</label><br />
     <input id="foto" name="foto" type="file" accept="image/jpeg" class="form-control"/>
     <br>
-    <label for="lido" class="form-label">Lido</label>
+    <label for="status" class="form-label">Status</label>
     <br>
-    <input type="radio" class="form-check-input" name="lido" id="false" value="false" checked>
-    <label for="lido">Não</label>
-    <input type="radio" class="form-check-input" name="lido" id="true" value="true">
-    <label for="lido">Sim</label>
+    <input type="radio" class="form-check-input" name="status" id="false" value="false" checked>
+    <label for="status">Não Lido</label>
+    <input type="radio" class="form-check-input" name="status" id="true" value="true">
+    <label for="status">Lido</label>
     <br>
     <label for="nome" class="form-label">Autor</label>
     <select class="form-select" id="autor_id" name="autor_id" required>

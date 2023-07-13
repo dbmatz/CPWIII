@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Livro;
 
 class Autor extends Model
@@ -17,8 +17,8 @@ class Autor extends Model
         'foto',
     ];  
 
-    public function livros()
+    public function livros(): BelongsToMany
     {
-        return $this->HasMany(Livro::class);
+        return $this->BelongsToMany(Livro::class);
     }
 }

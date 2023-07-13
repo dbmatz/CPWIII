@@ -63,3 +63,16 @@ td img{
     width: 4rem;
     height: 4rem;
 }
+
+.cards{
+    display: flex;
+    gap: 20px;
+}
+
+h1{
+    margin-bottom: 3rem;
+}
+
+.carouselExampleDark {
+    width: 10rem;
+}

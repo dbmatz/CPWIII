@@ -29,6 +29,11 @@ class ReviewController extends Controller
         $review->avaliacao = $request->input('avaliacao');
         $review->livro_id = $request->input('livro_id');
 
+        $livro = new Livro();
+        $livro = Livro::find($request->input('livro_id'));
+        $livro->lido = true;
+        $livro->save();
+
         if ($review->save()) {
             return redirect()->route('review-index')->with('status', 'Review criado!');
         } else {
@@ -70,6 +75,17 @@ class ReviewController extends Controller
             return redirect()->route('review-index')->with('status', 'Review deletado!');
         } else {
             return redirect()->route('review-index')->withErrors('Não foi possivel deletar o review.');
+        }
+    }
+
+    public function show($id)
+    {
+        $review = Review::find($id);
+
+        if (!empty($review)) {
+            return view('review-show', ['review' => $review]);
+        } else {
+            return redirect()->route('review-index')->withErrors('Não foi possivel achar o review.');
         }
     }
 
